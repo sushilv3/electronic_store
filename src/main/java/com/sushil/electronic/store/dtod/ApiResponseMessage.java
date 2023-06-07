@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
 public class ApiResponseMessage {
     private String message;
     private boolean success;
     private HttpStatus status;
+
 }

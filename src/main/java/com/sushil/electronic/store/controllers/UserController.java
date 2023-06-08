@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity createUser(@RequestBody UserDto userDto) {
         UserDto user = userService.createUser(userDto);
         return new ResponseEntity(user, HttpStatus.CREATED);
@@ -40,7 +40,7 @@ public class UserController {
         return new ResponseEntity(userService.getAllUser(), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/getUserByUserId/{userId}")
     public ResponseEntity getUserById(@PathVariable String userId) {
         UserDto user = userService.getUserBy(userId);
         return new ResponseEntity(user, HttpStatus.OK);

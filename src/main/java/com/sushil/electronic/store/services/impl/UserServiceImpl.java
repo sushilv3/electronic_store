@@ -2,6 +2,7 @@ package com.sushil.electronic.store.services.impl;
 
 import com.sushil.electronic.store.dtod.UserDto;
 import com.sushil.electronic.store.entities.User;
+import com.sushil.electronic.store.exceptions.ResourceNotFoundException;
 import com.sushil.electronic.store.repositories.UserRepository;
 import com.sushil.electronic.store.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(UserDto userDto, String userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found exception"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with user id : "+userId));
         user.setName(userDto.getName());
 //       user.setEmail(userDto.getEmail());
         user.setAbout(userDto.getAbout());
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found exception"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with user id : "+userId));
         userRepository.delete(user);
     }
 
@@ -58,14 +59,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserBy(String userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found exception"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with user id : "+userId));
         UserDto userDto = modelMapper.map(user, UserDto.class);
         return userDto;
     }
 
     @Override
     public UserDto getUserByEmail(String userEmail) {
-       User user= userRepository.findByEmail(userEmail).orElseThrow(()->new RuntimeException("user not found with email"));
+       User user= userRepository.findByEmail(userEmail).orElseThrow(()->new ResourceNotFoundException("user not found with email : "+userEmail));
       UserDto userDto= modelMapper.map(user,UserDto.class);
        return userDto;
     }

@@ -1,5 +1,6 @@
 package com.sushil.electronic.store.services;
 
+import com.sushil.electronic.store.dtod.PageableResponse;
 import com.sushil.electronic.store.dtod.UserDto;
 import com.sushil.electronic.store.entities.User;
 
@@ -12,13 +13,13 @@ public interface UserService {
 
     void deleteUser(String userId);
 
-    List<UserDto> getAllUser();
+    PageableResponse<UserDto> getAllUser(int pageNumber, int pageSize, String sortBy, String sortDir);
 
     UserDto getUserBy(String userId);
 
     UserDto getUserByEmail(String userEmail);
 
-    List<UserDto> searchUser(String keyword);
+    PageableResponse<UserDto> searchUser(String keyword, int pageNumber, int pageSize, String sortBy, String sortDir);
 
 
 }

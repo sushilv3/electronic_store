@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +29,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
+        String catId = UUID.randomUUID().toString();
+        categoryDto.setCategoryId(catId);
         Category category = modelMapper.map(categoryDto, Category.class);
         Category saveCategory = categoryRepository.save(category);
         return modelMapper.map(saveCategory, CategoryDto.class);

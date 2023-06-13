@@ -1,5 +1,6 @@
 package com.sushil.electronic.store.dtod;
 
+import com.sushil.electronic.store.entities.Category;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -22,4 +23,6 @@ public class ProductDto {
     private boolean live;
     private boolean stock;
     private String productImage;
+    private CategoryDto category;
+
 }
